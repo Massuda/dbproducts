@@ -24,7 +24,7 @@ public class ProductTest {
     
     @BeforeClass
     public static void initEntityManager() throws Exception {
-        emf = Persistence.createEntityManagerFactory("product-unit");
+        emf = Persistence.createEntityManagerFactory("products-unit");
         em = emf.createEntityManager();
     }
 
@@ -45,6 +45,9 @@ public class ProductTest {
         // Creates an instance of Product
         Product product = new Product();
         product.setName("SLANGAN");
+        product.setPrice(3.5F);
+		product.setDescription("A wonderful ...");
+		product.setCode("9781853262715-AA");
         // Persists the book to the database
         tx.begin();
         em.persist(product);
@@ -52,6 +55,6 @@ public class ProductTest {
         assertNotNull("ID should not be null", product.getId());
         // Retrieves all the products from the database
         List<Product> products = em.createNamedQuery("findAllProducts").getResultList();
-        assertEquals(1, products.size());
+        assertEquals(3, products.size());
     }
 }
